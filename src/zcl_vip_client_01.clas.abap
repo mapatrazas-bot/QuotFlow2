@@ -22,6 +22,7 @@ CLASS zcl_vip_client_01 DEFINITION
     METHODS zif_printable_01~obtener_info_completa  REDEFINITION.
     METHODS zif_printable_01~obtener_info_corta     REDEFINITION.
 
+
 ENDCLASS.
 
 

@@ -51,6 +51,21 @@ CLASS zcl_quotation_01 DEFINITION
     METHODS get_summary
       RETURNING VALUE(rv_summary) TYPE string.
 
+ EVENTS cotizacion_aprobada
+      EXPORTING VALUE(ev_id_cotizacion) TYPE string
+                VALUE(ev_nombre_cliente) TYPE string
+                VALUE(ev_total) TYPE decfloat16.
+
+    EVENTS cotizacion_rechazada
+      EXPORTING VALUE(ev_id_cotizacion) TYPE string
+                VALUE(ev_motivo) TYPE string.
+
+    METHODS aprobar_cotizacion.
+
+    METHODS rechazar_cotizacion
+      IMPORTING VALUE(iv_motivo) TYPE string OPTIONAL.
+
+
   PRIVATE SECTION.
     DATA client_name   TYPE string.
     DATA items         TYPE tt_items.
@@ -114,6 +129,31 @@ ENDMETHOD.
                  |Estado: { me->status } | &
                  |Fecha: { me->creation_date } | &
                  |Total: { me->calculate_total( ) } { zcl_product_01=>company_currency }|.
+  ENDMETHOD.
+
+    METHOD aprobar_cotizacion.
+* Cambia el estado a APROBADA y dispara el evento cotizacion_aprobada
+    me->status = cs_status-approved.
+    RAISE EVENT cotizacion_aprobada
+      EXPORTING
+        ev_id_cotizacion  = me->quotation_id
+        ev_nombre_cliente = me->client_name
+        ev_total          = me->calculate_total( ).
+  ENDMETHOD.
+
+  METHOD rechazar_cotizacion.
+* Cambia el estado a RECHAZADA y dispara el evento cotizacion_rechazada
+    me->status = cs_status-rejected.
+    DATA(lv_motivo) = CONV string( '' ).
+    IF iv_motivo IS SUPPLIED.
+      lv_motivo = iv_motivo.
+    ELSE.
+      lv_motivo = 'Sin motivo especificado'.
+    ENDIF.
+    RAISE EVENT cotizacion_rechazada
+      EXPORTING
+        ev_id_cotizacion = me->quotation_id
+        ev_motivo        = lv_motivo.
   ENDMETHOD.
 
 ENDCLASS.
