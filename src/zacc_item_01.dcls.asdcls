@@ -1,0 +1,7 @@
+@EndUserText.label: 'Control acceso posiciones - QuotFlow'
+@MappingRole: true
+define role ZACC_ITEM_01
+{
+  grant select on ZDD_R_ITEM_01
+    where inheriting conditions from entity ZDD_C_ITEM_01;
+}

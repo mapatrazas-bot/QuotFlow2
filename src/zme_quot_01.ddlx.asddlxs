@@ -1,0 +1,71 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+  typeName:       'Cotizacion',
+  typeNamePlural: 'Cotizaciones',
+  title:          { value: 'IdCotizacion', type: #STANDARD },
+  description:    { value: 'NombreCliente', type: #STANDARD }
+}
+
+annotate entity ZDD_C_QUOT_01 with
+{
+
+  @UI.facet: [
+    {
+      id:            'GeneralInfo',
+      type:          #IDENTIFICATION_REFERENCE,
+      label:         'Informacion General',
+      position:      10
+    },
+    {
+      id:            'Posiciones',
+      type:          #LINEITEM_REFERENCE,
+      label:         'Posiciones',
+      position:      20,
+      targetElement: '_Posiciones'
+    }
+  ]
+
+  @UI.lineItem:       [{ position: 10, label: 'ID Cotizacion' }]
+  @UI.identification: [{ position: 10 }]
+  @UI.selectionField: [{ position: 10 }]
+  IdCotizacion;
+
+  @UI.lineItem:       [{ position: 20, label: 'Cliente' }]
+  @UI.identification: [{ position: 20 }]
+  @UI.selectionField: [{ position: 20 }]
+  NombreCliente;
+
+  @UI.lineItem:       [{ position: 30, label: 'Estado' }]
+  @UI.identification: [{ position: 30 }]
+  @UI.selectionField: [{ position: 30 }]
+  Estado;
+
+  @UI.lineItem:       [{ position: 40, label: 'Total' }]
+  @UI.identification: [{ position: 40 }]
+  Total;
+
+  @UI.lineItem:       [{ position: 50, label: 'Moneda' }]
+  @UI.identification: [{ position: 50 }]
+  Moneda;
+
+  @UI.lineItem:       [{ position: 60, label: 'Fecha Creacion' }]
+  @UI.identification: [{ position: 60 }]
+  FechaCreacion;
+
+  @UI.identification: [{ position: 70 }]
+  MotivoRechazo;
+
+  @UI.hidden: true
+  IdCliente;
+
+  @UI.hidden: true
+  CreadoPor;
+
+  @UI.hidden: true
+  CreadoEn;
+
+  @UI.hidden: true
+  ModificadoEn;
+
+}

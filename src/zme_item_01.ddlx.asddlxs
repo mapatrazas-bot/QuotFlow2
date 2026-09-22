@@ -1,0 +1,61 @@
+@Metadata.layer: #CORE
+
+@UI.headerInfo: {
+  typeName:       'Posicion',
+  typeNamePlural: 'Posiciones',
+  title:          { value: 'IdPosicion', type: #STANDARD },
+  description:    { value: 'NombreProducto', type: #STANDARD }
+}
+
+annotate entity ZDD_C_ITEM_01 with
+{
+
+  @UI.facet: [
+    {
+      id:       'DetalleProducto',
+      type:     #IDENTIFICATION_REFERENCE,
+      label:    'Detalle Posicion',
+      position: 10
+    }
+  ]
+
+  @UI.lineItem:       [{ position: 10, label: 'Posicion' }]
+  @UI.identification: [{ position: 10 }]
+  IdPosicion;
+
+  @UI.lineItem:       [{ position: 20, label: 'Producto' }]
+  @UI.identification: [{ position: 20 }]
+  NombreProducto;
+
+  @UI.lineItem:       [{ position: 30, label: 'Cantidad' }]
+  @UI.identification: [{ position: 30 }]
+  Cantidad;
+
+  @UI.lineItem:       [{ position: 40, label: 'Precio Unitario' }]
+  @UI.identification: [{ position: 40 }]
+  PrecioUnitario;
+
+  @UI.lineItem:       [{ position: 50, label: 'Total Linea' }]
+  @UI.identification: [{ position: 50 }]
+  TotalLinea;
+
+  @UI.lineItem:       [{ position: 60, label: 'Moneda' }]
+  @UI.identification: [{ position: 60 }]
+  Moneda;
+
+  @UI.hidden: true
+  IdCotizacion;
+
+  @UI.hidden: true
+  IdProducto;
+
+  @UI.hidden: true
+  CreadoPor;
+
+  @UI.hidden: true
+  CreadoEn;
+
+  @UI.hidden: true
+  ModificadoEn;
+
+}

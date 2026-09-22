@@ -1,0 +1,7 @@
+@EndUserText.label: 'Control acceso cotizaciones - QuotFlow'
+@MappingRole: true
+define role ZACC_QUOT_01
+{
+  grant select on ZDD_R_QUOT_01
+    where inheriting conditions from entity ZDD_C_QUOT_01;
+}
