@@ -9,63 +9,50 @@
 
 annotate entity ZDD_C_QUOT_01 with
 {
-
   @UI.facet: [
-    {
-      id:            'GeneralInfo',
-      type:          #IDENTIFICATION_REFERENCE,
-      label:         'Informacion General',
-      position:      10
-    },
-    {
-      id:            'Posiciones',
-      type:          #LINEITEM_REFERENCE,
-      label:         'Posiciones',
-      position:      20,
-      targetElement: '_Posiciones'
-    }
+    { id: 'GeneralInfo', type: #IDENTIFICATION_REFERENCE,
+      label: 'Informacion General', position: 10 },
+    { id: 'Posiciones',  type: #LINEITEM_REFERENCE,
+      label: 'Posiciones', position: 20,
+      targetElement: '_Posiciones' }
   ]
 
   @UI.lineItem:       [{ position: 10, label: 'ID Cotizacion' }]
-  @UI.identification: [{ position: 10 }]
+  @UI.identification: [{ position: 10, label: 'ID Cotizacion' }]
   @UI.selectionField: [{ position: 10 }]
   IdCotizacion;
 
   @UI.lineItem:       [{ position: 20, label: 'Cliente' }]
-  @UI.identification: [{ position: 20 }]
+  @UI.identification: [{ position: 20, label: 'ID Cliente' }]
   @UI.selectionField: [{ position: 20 }]
-  NombreCliente;
-
-  @UI.lineItem:       [{ position: 30, label: 'Estado' }]
-  @UI.identification: [{ position: 30 }]
-  @UI.selectionField: [{ position: 30 }]
-  Estado;
-
-  @UI.lineItem:       [{ position: 40, label: 'Total' }]
-  @UI.identification: [{ position: 40 }]
-  Total;
-
-  @UI.lineItem:       [{ position: 50, label: 'Moneda' }]
-  @UI.identification: [{ position: 50 }]
-  Moneda;
-
-  @UI.lineItem:       [{ position: 60, label: 'Fecha Creacion' }]
-  @UI.identification: [{ position: 60 }]
-  FechaCreacion;
-
-  @UI.identification: [{ position: 70 }]
-  MotivoRechazo;
-
-  @UI.hidden: true
   IdCliente;
 
-  @UI.hidden: true
+  @UI.lineItem:       [{ position: 30, label: 'Nombre Cliente' }]
+  @UI.identification: [{ position: 30, label: 'Nombre Cliente' }]
+  @UI.selectionField: [{ position: 30 }]
+  NombreCliente;
+
+  @UI.lineItem:       [{ position: 40, label: 'Estado' }]
+  @UI.identification: [{ position: 40, label: 'Estado' }]
+  @UI.selectionField: [{ position: 40 }]
+  Estado;
+
+  @UI.lineItem:       [{ position: 50, label: 'Total' }]
+  @UI.identification: [{ position: 50, label: 'Total' }]
+  Total;
+
+  @UI.lineItem:       [{ position: 60, label: 'Moneda' }]
+  @UI.identification: [{ position: 60, label: 'Moneda' }]
+  Moneda;
+
+  @UI.lineItem:       [{ position: 70, label: 'Fecha Creacion' }]
+  @UI.identification: [{ position: 70, label: 'Fecha Creacion' }]
+  @UI.selectionField: [{ position: 50 }]
+  FechaCreacion;
+
+  @UI.identification: [{ position: 80, label: 'Motivo Rechazo' }]
+  MotivoRechazo;
+
+  @UI.identification: [{ position: 90, label: 'Creado Por' }]
   CreadoPor;
-
-  @UI.hidden: true
-  CreadoEn;
-
-  @UI.hidden: true
-  ModificadoEn;
-
 }

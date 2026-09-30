@@ -1,0 +1,25 @@
+projection;
+use draft;
+
+define behavior for ZDD_C_QUOT_01 alias Cotizacion
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Posiciones { create; with draft; }
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+}
+
+define behavior for ZDD_C_ITEM_01 alias Posicion
+{
+  use update;
+  use delete;
+
+  use association _Cotizacion { with draft; }
+}

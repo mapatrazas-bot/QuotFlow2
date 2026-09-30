@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition cotizaciones'
+define service ZSD_QUOT_01 {
+  expose ZDD_C_QUOT_01 as Cotizacion;
+  expose ZDD_C_ITEM_01 as Posicion;
+}

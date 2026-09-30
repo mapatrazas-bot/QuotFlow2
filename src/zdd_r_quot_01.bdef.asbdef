@@ -1,0 +1,70 @@
+managed implementation in class ZCL_BP_R_QUOT_01 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZDD_R_QUOT_01 alias Cotizacion
+  persistent table zdt_quot_01
+  draft table zdt_quot_01_d
+  lock master total etag ModificadoEn
+  authorization master ( instance )
+  etag master ModificadoEn
+{
+  create; update; delete;
+
+  association _Posiciones { create; with draft; }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( readonly ) CreadoPor, CreadoEn, ModificadoEn;
+  field ( mandatory ) IdCotizacion, IdCliente, NombreCliente, Moneda;
+
+  mapping for zdt_quot_01 corresponding
+  {
+    IdCotizacion  = id_cotizacion;
+    IdCliente     = id_cliente;
+    NombreCliente = nombre_cliente;
+    Estado        = estado;
+    Total         = total;
+    Moneda        = moneda;
+    MotivoRechazo = motivo_rechazo;
+    FechaCreacion = fecha_creacion;
+    CreadoPor     = creado_por;
+    CreadoEn      = creado_en;
+    ModificadoEn  = modificado_en;
+  }
+}
+
+define behavior for ZDD_R_ITEM_01 alias Posicion
+  persistent table zdt_item_01
+  draft table zdt_item_01_d
+  lock dependent by _Cotizacion
+  authorization dependent by _Cotizacion
+  etag master ModificadoEn
+{
+  update;
+  delete;
+
+  association _Cotizacion { with draft; }
+
+  field ( readonly ) IdPosicion, IdCotizacion, CreadoPor, CreadoEn, ModificadoEn;
+  field ( mandatory ) IdProducto, Cantidad, PrecioUnitario;
+
+  mapping for zdt_item_01 corresponding
+  {
+    IdCotizacion   = id_cotizacion;
+    IdPosicion     = id_posicion;
+    IdProducto     = id_producto;
+    NombreProducto = nombre_producto;
+    Cantidad       = cantidad;
+    PrecioUnitario = precio_unitario;
+    TotalLinea     = total_linea;
+    Moneda         = moneda;
+    CreadoPor      = creado_por;
+    CreadoEn       = creado_en;
+    ModificadoEn   = modificado_en;
+  }
+}
